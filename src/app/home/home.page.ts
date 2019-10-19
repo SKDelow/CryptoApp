@@ -10,27 +10,25 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  coinID: string;
+  ID: string;
   coinName: string;
   price: string;
+  currency: string;
 
 
-  constructor(public crypto: CryptoService, public router: Router) {
-    this.newCoin();
+  constructor(public crypto: CryptoService) {
+    // this.newCoin();
+    
   }
 
   newCoin() {
+    this.crypto.coinId = this.ID;
     this.crypto.getCoin().subscribe(data => {
-      console.log(this.coinID);
+      console.log(data);
       this.coinName = data.coin_name;
-      this.price = data.last_price;
+      this.price = data.last_price + " " + data.currency;
       
     })
   }
-  // SaveInput() {
-  //   this.router.navigate(['/name/' + this.coinID]);
-  // }
- 
-
 }
 
